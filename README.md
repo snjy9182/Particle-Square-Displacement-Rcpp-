@@ -1,9 +1,10 @@
 # Particle Mean Square Displacement
-Date: 05/16/2017
+*Johns Hopkins University*
+
+*Date: 05/16/2017*
 
 Principal Investigator: Professor Carl Wu
 
-The Johns Hopkins University
 School of Medicine / Department of Biology
 
 Author: Sun Jay Yoo
