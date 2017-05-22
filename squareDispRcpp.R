@@ -21,16 +21,16 @@ library(Rcpp)
 library(RcppArmadillo)
 
 #To load sample track data
-#library(smt)
-#folder=system.file("extdata","SWR1",package="smt")
-#trackll=readDiatrack(folder)
-#track = trackll[[1]][[3]]
-
-#Compile source C++ file, enter file path of file
-sourceCpp("/Users/sunjayyoo/Dropbox/Work/Particle\ Square\ Displacement/squareDispRcpp.cpp")
+library(smt)
+folder=system.file("extdata","SWR1",package="smt")
+trackll=readDiatrack(folder)
+track = trackll[[1]][[3]]
 
 #convert given track to matrix type
 track = data.matrix(track)
+
+#Compile source C++ file, enter file path of file
+sourceCpp("/Users/sunjayyoo/Dropbox/Work/Particle\ Square\ Displacement/squareDispRcpp.cpp")
 
 #run squareDispRcpp.cpp 
 #(pass in an additional argument to change dt from the default of 1)

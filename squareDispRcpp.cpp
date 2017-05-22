@@ -22,9 +22,11 @@ List squareDispRcpp(arma::mat track, int dt = 1, double resolution = 0.107){
 
 	//Throw error if dt is greater than the track length - 1
 	if (dt >= track.n_rows){
-		std::cout << "track length: " << track.n_rows << std::endl;
-		std::cout <<"dt: " << dt << std::endl;
-		throw std::invalid_argument( "Time interval (dt) greater than track length-1" );
+	  std::string error = 
+	    "\ntrack length:\t" + std::to_string(track.n_rows) + "\n" + 
+	    "dt:     \t" + std::to_string(dt) + "\n" +
+	    "Time interval (dt) greater than track length-1";
+		throw std::invalid_argument(error);
 	}
 
 	//Create a vector of matrices with algorithmically accurate dimensions according to dt time steps
@@ -70,12 +72,20 @@ List squareDispRcpp(arma::mat track, int dt = 1, double resolution = 0.107){
 			}
 	}
 
-	//Create Rcpp::List type and cast back each matrix from the vector into the List
+	//Create Rcpp::List type.
+	//Cast back each matrix from the vector into a R Numeric Matrix and set appropriate dimension names.
+	//Place ordered Numeric Matrices into List.
 	//(List type not used in algorithm as .push_back() for List is extremely memory ineffecient
 	//and element access operations difficult in C++ for non-native List type)
 	List tracklist(dt);
-	for (int i = 0; i < dt; i++)
-		tracklist[i] = trackOut[i];
-
+	for (int i = 0; i < dt; i++){
+	  NumericMatrix m = wrap(trackOut[i]);
+	  colnames(m) = CharacterVector::create("x", "y", "z", "index", "square.disp", "dx", "dy");
+	  arma::colvec r = trackOut[i].col(3);
+	  CharacterVector v = as<CharacterVector>(wrap(r));
+	  rownames(m) = v;
+	  
+		tracklist[i] = m;
+	}
 	return tracklist;
 }
