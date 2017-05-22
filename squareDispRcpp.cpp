@@ -73,11 +73,12 @@ List squareDispRcpp(arma::mat track, int dt = 1, double resolution = 0.107){
 	}
 
 	//Create Rcpp::List type.
-	//Cast back each matrix from the vector into a R Numeric Matrix and set appropriate dimension names.
-	//Place ordered Numeric Matrices into List.
 	//(List type not used in algorithm as .push_back() for List is extremely memory ineffecient
 	//and element access operations difficult in C++ for non-native List type)
 	List tracklist(dt);
+	
+	//Cast back each matrix from the vector into a R Numeric Matrix and set appropriate dimension names.
+	//Place ordered Numeric Matrices into List.
 	for (int i = 0; i < dt; i++){
 	  NumericMatrix m = wrap(trackOut[i]);
 	  colnames(m) = CharacterVector::create("x", "y", "z", "index", "square.disp", "dx", "dy");
