@@ -5,7 +5,7 @@ Wu Lab, Johns Hopkins University
 (Referenced squareDisp.R algorithm from Sheng Liu)
 
 Author: Sun Jay Yoo
-Date: May 17, 2017
+Date: May 22, 2017
 */
 
 #include <armadillo>
