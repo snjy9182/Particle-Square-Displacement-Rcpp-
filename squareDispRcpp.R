@@ -29,8 +29,9 @@ library(RcppArmadillo)
 #convert given track to matrix type
 track = data.matrix(track)
 
-#Compile source C++ file, **enter file path of file**
-sourceCpp("/Users/sunjayyoo/Dropbox/Work/Particle\ Square\ Displacement/squareDispRcpp.cpp")
+#Compile source C++ file
+file =file.choose()
+sourceCpp(file)
 
 #run squareDispRcpp.cpp 
 #(pass in an additional argument to change dt from the default of 1)
